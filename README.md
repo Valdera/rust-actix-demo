@@ -16,4 +16,5 @@ cargo test
 ```
 
 ## Todo
-- Add Authentication example
+- Add authentication example
+- Using clean architecture
