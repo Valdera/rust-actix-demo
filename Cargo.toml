@@ -9,9 +9,8 @@ path = "src/lib.rs"
 [dependencies]
 actix-web = "4.2.1"
 tokio = {version = "1", features = ["macros", "rt-multi-thread"]}
-reqwest = "0.11.12"
 serde = {version = "1", features = ["derive"]}
-config = "0.11"
+config = { version = "0.13", default-features = false, features = ["yaml"] }
 uuid = { version = "1.1.2", features = ["v4"] }
 chrono = "0.4.22"
 tracing = { version = "0.1", features = ["log"] }
@@ -19,17 +18,9 @@ tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
 tracing-bunyan-formatter = "0.3"
 tracing-actix-web = "0.5"
 tracing-log = "0.1"
-once_cell = "1"
 secrecy = { version = "0.8", features = ["serde"] }
+sqlx = { version = "0.6", default-features = false, features = ["runtime-actix-rustls", "macros", "postgres", "uuid", "chrono", "migrate", "offline"] }
 
-[dependencies.sqlx]
-version = "0.6.2"
-default-features = false
-features = [
-    "runtime-actix-rustls",
-    "macros",
-    "postgres",
-    "uuid",
-    "chrono",
-    "migrate"
-]
+[dev-dependencies]
+reqwest = "0.11.12"
+once_cell = "1"
