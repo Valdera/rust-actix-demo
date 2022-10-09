@@ -1,0 +1,41 @@
+name: actix_demo
+region: fra
+services: 
+  - name: actix_demo
+    dockerfile_path: Dockerfile
+    source_dir: .
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: Valdera/rust-actix-demo
+    health_check:
+      http_path: /health_check
+    http_port: 8000
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    routes:
+      - path: /
+    envs: 
+      - key: APP_DATABASE__USERNAME
+        scope: RUN_TIME
+        value: ${newsletter.USERNAME}
+      - key: APP_DATABSE__PASSWORD
+        scope: RUN_TIME
+        value: ${newletter.PASSWORD}
+      - key: APP_DATABSE__HOST
+        scope: RUN_TIME
+        value: ${newletter.HOSTNAME}
+      - key: APP_DATABSE__PORT
+        scope: RUN_TIME
+        value: ${newletter.PORT}
+      - key: APP_DATABSE__DATABASE_NAME
+        scope: RUN_TIME
+        value: ${newletter.DATABASE}
+      
+
+databases:
+  - engine: PG
+    name: newsletter
+    num_nodes: 1
+    size: db-s-dev-database
+    version: "12"
